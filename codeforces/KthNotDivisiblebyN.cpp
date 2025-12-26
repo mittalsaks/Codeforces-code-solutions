@@ -1,24 +1,36 @@
-#include<iostream>
-#include<vector>
+#include <bits/stdc++.h>
 using namespace std;
-int main(){
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
     int t;
-    cin>>t;
-    vector<int>ans;
-    while(t--){
-        int n,k;
-        cin>>n>>k;
-        for(int i=1;i<100000000000000000;i++){
-            if(n%i!=0){
-                k--;
-            }
-            if(k==0){
-                ans.push_back(i);
-                break;
+    cin >> t;
+
+    while (t--) {
+        long long n, k;
+        cin >> n >> k;
+
+        long long low = 1, high = 1e18;
+        long long ans = 0;
+
+        while (low <= high) {
+            long long mid = low + (high - low) / 2;
+
+            // count of numbers NOT divisible by n till mid
+            long long notDiv = mid - (mid / n);
+
+            if (notDiv >= k) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
             }
         }
+
+        cout << ans << "\n";
     }
-    for(auto i:ans){
-        cout<<i<<"\n";
-    }
+
+    return 0;
 }
