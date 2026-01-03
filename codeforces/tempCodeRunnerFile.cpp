@@ -1,23 +1,22 @@
 #include<iostream>
+#include<algorithm>
 using namespace std;
- bool only4and7(long long n){
-        while(n>0){
-            long long digit=n%10;
-            if(digit!=4 && digit!=7){
-                return false;
-            }
-            n/=10;
-        }
-        return true;
-    }
 int main(){
     long long n;
     cin>>n;
-    //Condition -1
-    if(n%4==0 || n%7==0 || only4and7(n)){
-        cout<<"YES";
+    long long arr[n];
+    //Take input from user
+    for(long long i=0;i<n;i++){
+        cin>>arr[i];
     }
-    else{   
-        cout<<"NO";
+    long long strength=0;
+    sort(arr,arr+n);
+    long long mini=arr[0];
+    long long maxi=arr[n-1];
+    for(long long i=0;i<n;i++){
+        if((mini<arr[i])&&(arr[i]<maxi)){
+            strength++;
+        }
     }
+    cout<<strength;
 }
